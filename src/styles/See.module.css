@@ -1,0 +1,92 @@
+.col{
+    display: flex;
+    height: 100vh;
+}
+.intro{
+    height: 33vh;
+    width: 80vw;
+    background-color: rgb(31, 31, 31); 
+}
+.intro_img{
+    height: 300px;
+    width: 300px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.intro_pos{
+    display: flex;
+}
+.intro_intro{
+    color: white;
+    margin-left: 40px;
+}
+.h1{
+    font-size: 70px;
+}
+.list{
+    width: 80vw;
+    background-color:rgb(60, 59, 59);
+    height: 67vh;
+    color: white;
+}
+.grid{
+   display: flex;
+   
+}
+.tit{
+    width: 40%;
+    margin-left: 30px;
+    
+}
+.al{
+    width: 25%;
+}
+.add{
+    width: 20%;
+}
+.icon{
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+.hr{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.list_row{
+    display: flex;
+    margin-left: 30px;
+    height: 50px;
+    width: 78.4vw;
+    margin-top: 20px;
+}
+.row_img{
+    height: 50px;
+    width: 50px;
+}
+.list_flex{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 40%;
+}
+.play{
+    color: rgb(71, 196, 71);
+    font-size: 3vw;
+    margin-left: 20px;
+ 
+}
+.heart{
+    font-size: 2vw;
+  
+    
+}
+.mur{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    gap: 20px;
+}
+.hidden{
+    overflow: scroll;
+    height: 42.6vh;
+}

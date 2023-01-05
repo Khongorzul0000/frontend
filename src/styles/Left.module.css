@@ -1,0 +1,81 @@
+.body{
+    display: flex; 
+    justify-content: center; 
+}
+.back{
+    height: 100vh;
+    width: 20vw;
+    background-color: rgb(7, 7, 7);
+    color:white;
+}
+.spoty{
+    font-size: 1.5vw;
+    margin-right: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
+}
+.home{
+    font-size: 1vw;
+    margin-bottom: 20px;
+    font-family:  Arial, Helvetica, sans-serif;
+    gap: 10px;
+    margin-left: 30px;
+} 
+.play{  
+    margin-left: 30px;
+    color: rgb(71, 196, 71);
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+}
+.link{
+    color: aliceblue;
+    font-size: 17px;
+}
+body{
+    display: block;
+}
+.ttt{
+    margin-top: 50px;
+}
+.ai{
+    display: flex;
+}
+.fb{
+    display: block;
+}
+.nav{
+    height: 7vh;
+    width: 80vw;
+    background-color: rgb(29, 29, 29);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    
+}
+.signup{
+    height: 50px;
+    width: 100px;
+    background-color: rgb(248, 250, 252);
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin-left: 20px;
+
+}
+.zai{
+    display: flex;
+}
+.ger{
+    height: 30px;
+    width: 80px;
+    background-color: rgb(45, 75, 171);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-left: 30px;
+}
