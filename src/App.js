@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import { Signup, Login, Home } from "./component";
-import { Date2, Search} from "./component";
+import { Date2, Search, My} from "./component";
 
 function App() {
   return (

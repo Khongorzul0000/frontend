@@ -23,7 +23,7 @@ export const Signup = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate("/login");
+        navigate("/home");
         //   axios.post('http://localhost:3001/users', {
         //     email:user.email,
         //     password:password,

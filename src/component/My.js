@@ -25,17 +25,10 @@ export const My = () => {
 
   const add = () => {
     const newTask = { text: value, isCompleted: false, img: image };
-
     setTasks([...tasks, newTask]);
     console.log(value);
-    // console.log(image)
     if ((!value, !image)) return;
   };
-  // const plus = () => {
-  //   if (!image) return;
-  //   const newImg = { img: image, isCompleted: false };
-  //   setTasks([...tasks, newImg]);
-  // };
   const remove = (index) => {
     console.log("remove");
     const newTasks = tasks.filter((_, i) => {

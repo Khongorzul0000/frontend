@@ -3,8 +3,6 @@
     width: 76vw;
     background-color: #121212;
     padding: 0 2vw 0vw 2vw;
-    
-
 }
 .main{
     display: flex;
@@ -29,7 +27,7 @@
 .username{
     height: 35px;
     width: 130px;
-    background-color: rgb(65, 69, 67);
+    background-color: rgb(90, 130, 110);
     display: flex;
     align-items: center;
     border-radius: 3px;
@@ -37,4 +35,16 @@
 }
 .nav{
     display: flex;
+}
+.dec{
+    height: 500px;
+    width: 500px;
+    background-color: green;
+
+
+}
+.plca{
+    height: 100px;
+    width: 100px;
+    border: 1px solid red;
 }

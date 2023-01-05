@@ -8,6 +8,9 @@ import axios from "axios";
 
 export const Home = () => {
   const [user, setUser] = useState(null);
+  const [title, setTitle] = useState("");
+  const [des, setDes] = useState("");
+  const [playlist, setPlaylist] = useState([]);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -16,14 +19,13 @@ export const Home = () => {
         navigate("/Signup");
         console.log("ashgu dee");
       })
-      .catch((error) => {});
+      .catch((error) => {console.log(error)});
   };
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       console.log(user);
       if (user) {
         setUser(user);
-
         const uid = user.uid;
         console.log(user);
         console.log("uid", uid);
@@ -32,51 +34,61 @@ export const Home = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/playlists").then((res) => {
+      setPlaylist(res.data);
+    }).catch(console.log)
+  }, [])
+
   const createPlaylist = () => {
+    const newPlaylist = { title: title, description: des };
+    setPlaylist([...playlist, newPlaylist]);
+    console.log(title);
+    console.log(des);
+    if ((!title, !des)) return;
     axios
       .post("http://localhost:3001/playlists", {
-        title: "bish",
-        description: "good",
+        title: title,
+        description: des,
         creatorId: user.uid,
         isPrivate: true,
       })
       .then((res) => {
         console.log(res);
         console.log("poooo");
-       
       });
   };
 
   return (
     <>
-    <div className={styles.nav}>
-      <div className={styles.username}>
-      {user && <p>{user.email}</p>}
-      </div>
-      <div>
-        <button onClick={handleLogout}>logout</button>
-        <button onClick={createPlaylist}>createplaylist</button>
-      </div>
-    </div>
-    <div className={styles.main}>
-      
-    <div>
-      <div className={styles.body}>
-        <div className={styles.over}>
-        <h2 className={styles.focus}>Focus song</h2>
-        <Lenght/>
-        <h2 className={styles.focus}>Recommended radio</h2>
-        <Song/>
-        <h2 className={styles.focus}>Mood</h2>
-        <div className={styles.p}>/available to like/</div>
-        <Oneof/>
-        <h2 className={styles.focus}>Spotify play-lists</h2>
-        <div className={styles.p}>/available to like/</div>
-        <Happy />
+      <div className={styles.nav}>
+        <div className={styles.username}>{user && <p>{user.email}</p>}</div>
+        <div className={styles.dec}>
+          <p>title</p>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          ></input>
+          <p>description</p>
+          <input value={des} onChange={(e) => setDes(e.target.value)}></input>
+          <button onClick={createPlaylist}>createplaylist</button>
         </div>
-       
+        <div>
+          <button onClick={handleLogout}>logout</button>
+        </div>
       </div>
-    </div>
-  </div></>
+      <div className={styles.main}>
+        {console.log(playlist, 'playlist')}
+       <div>{playlist.map((play, index) =>{
+        return(<>
+        <div className={styles.plca}>
+          <p>{play.title}</p>
+          <p>{play.description}</p>
+        </div>
+        </>)
+       })}</div>
+      </div>
+    </>
   );
 };
