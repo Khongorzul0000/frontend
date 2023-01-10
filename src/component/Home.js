@@ -19,7 +19,9 @@ export const Home = () => {
         navigate("/Signup");
         console.log("ashgu dee");
       })
-      .catch((error) => {console.log(error)});
+      .catch((error) => {
+        console.log(error);
+      });
   };
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -36,19 +38,23 @@ export const Home = () => {
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/playlists").then((res) => {
-      setPlaylist(res.data);
-    }).catch(console.log)
-  }, [])
+    axios
+      .get("http://localhost:3001/playlists")
+      .then((res) => {
+        setPlaylist(res.data);
+      })
+      .catch(console.log);
+  }, []);
 
   const createPlaylist = () => {
     const newPlaylist = { title: title, description: des };
     setPlaylist([...playlist, newPlaylist]);
-    console.log(title);
-    console.log(des);
-    if ((!title, !des)) return;
+    
+    if ((!title, !des)) {
+      return;
+    }
     axios
-      .post("http://localhost:3001/playlists", {
+      .get("http://localhost:3002/playlists", {
         title: title,
         description: des,
         creatorId: user.uid,
@@ -59,36 +65,54 @@ export const Home = () => {
         console.log("poooo");
       });
   };
+  const deletePlaylist = () =>{
+    axios
+    .delete("http://localhost:3002/playlists",{
+
+    })
+  }
 
   return (
-    <>
+    <div className={styles.be}>
+      <div className={styles.cp}>
+        <h1>createPlaylist</h1>
+      </div>
       <div className={styles.nav}>
-        <div className={styles.username}>{user && <p>{user.email}</p>}</div>
         <div className={styles.dec}>
-          <p>title</p>
+          <p>createPlaylist</p>
           <input
+            className={styles.inpt}
             value={title}
+            placeholder="title"
             onChange={(e) => setTitle(e.target.value)}
           ></input>
-          <p>description</p>
-          <input value={des} onChange={(e) => setDes(e.target.value)}></input>
-          <button onClick={createPlaylist}>createplaylist</button>
+          <input
+            className={styles.inpt}
+            value={des}
+            onChange={(e) => setDes(e.target.value)}
+            placeholder="description"
+          ></input>
+          <button onClick={createPlaylist} className={styles.cr}>createplaylist</button>
         </div>
-        <div>
-          <button onClick={handleLogout}>logout</button>
-        </div>
+        <div>{/* <button onClick={handleLogout}>logout</button> */}</div>
       </div>
       <div className={styles.main}>
-        {console.log(playlist, 'playlist')}
-       <div>{playlist.map((play, index) =>{
-        return(<>
-        <div className={styles.plca}>
-          <p>{play.title}</p>
-          <p>{play.description}</p>
+        {console.log(playlist, "playlist")}
+        <div className={styles.plj}>
+          {playlist.map((play, index) => {
+            return (
+              <div >
+                <div className={styles.plca}>
+                  <img src="https://wallpapercave.com/wp/wp8404552.jpg" className={styles.wall}></img>
+                  <p className={styles.title}>{play.title}</p>
+                  <p className={styles.des}>{play.description}</p>
+                  <button onClick={deletePlaylist} className={styles.ax}>delete</button>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        </>)
-       })}</div>
       </div>
-    </>
+    </div>
   );
 };

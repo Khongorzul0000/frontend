@@ -21,3 +21,11 @@
     display: flex;
     justify-content: center;
 }
+.pos{
+    display: flex;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    height: 93vh;
+    background-color: #252525;
+}

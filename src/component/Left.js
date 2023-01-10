@@ -4,12 +4,41 @@ import { BsBookmarkHeartFill } from "react-icons/bs";
 import { AiFillHome } from "react-icons/ai";
 import { AiFillSignal } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
-import { See, Main, Signup, My, Search, Like, Login } from "../component";
+import { FaUserAlt } from "react-icons/fa";
+import { See, Home, Signup, My, Search, Like, Login } from "../component";
 import { BiLibrary } from "react-icons/bi";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import styles from "../styles/Left.module.css";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../config/firebase";
 export const Left = () => {
+  const [user, setUser] = useState(null);
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("ashgu dee");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if (user) {
+        setUser(user);
+        const uid = user.uid;
+        console.log(user);
+        console.log("uid", uid);
+      } else {
+        console.log("user is logged");
+      }
+    });
+  }, []);
   return (
     <div className={styles.ai}>
       <BrowserRouter>
@@ -38,7 +67,7 @@ export const Left = () => {
                   Create play-list
                 </Link>
               </div>
-              
+
               <div className={styles.home}>
                 <BsBookmarkHeartFill />
                 <Link to="liked songs" className={styles.link}>
@@ -46,13 +75,28 @@ export const Left = () => {
                 </Link>
               </div>
             </div>
-            <div className={styles.play}>
+            {/* <div className={styles.play}>
               <AiFillPlayCircle />
               <Link to="see-more" className={styles.link}>
                 See more
               </Link>
-            </div>
-            <div className={styles.ger}>
+            </div> */}
+          </div>
+        </div>
+        <div className={styles.fb}>
+          <div className={styles.nav}>
+            <div className={styles.zai}>
+              <div className={styles.username}>
+                {user && (
+                  <p className={styles.zereg}>
+                    <div className={styles.nuur}>
+                      <FaUserAlt />
+                    </div>
+                    user : {user.email}
+                  </p>
+                )}
+              </div>
+              <div className={styles.ger}>
                 <Link to="sign-up" className={styles.link}>
                   Sign-up
                 </Link>
@@ -62,26 +106,13 @@ export const Left = () => {
                   login
                 </Link>
               </div>
+            </div>
           </div>
-        </div>
-        
-
-        <div className={styles.fb}>
-          {/* <div className={styles.nav}>
-            <div className={styles.zai}>
-            <div className={styles.signup}>
-              <Link to="signup">sign up</Link>
-            </div>
-            <div className={styles.signup}>
-              <Link to="login">log in</Link>
-            </div>
-            </div>
-          </div> */}
           <Routes>
-            <Route path="Home" element={<Main />}></Route>
-            <Route path="/" element={<Main />}></Route>
+            <Route path="Home" element={<Home />}></Route>
+            <Route path="/" element={<Home />}></Route>
             <Route path="Search" element={<Search />}></Route>
-            <Route path="see-more" element={<See />}></Route>
+            {/* <Route path="see-more" element={<See />}></Route> */}
             <Route path="sign-up" element={<Signup />}></Route>
             <Route path="log-in" element={<Login />}></Route>
             <Route path="create play-list" element={<My />}></Route>

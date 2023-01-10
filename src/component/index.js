@@ -3,7 +3,7 @@ export * from "./Login";
 export * from "./Signup";
 export * from "./Left";
 export * from "./Song";
-export * from "./Main";
+// export * from "./Main";
 export * from "./See";
 
 export * from "./Search";

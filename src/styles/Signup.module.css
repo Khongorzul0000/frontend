@@ -2,7 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80vw;
+    background-color: #252525;
+   height:93vh;
+   
 }
 .signup{
     height: 400px;
@@ -14,7 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 93vh;
 }
 .h1{
     display: flex;
