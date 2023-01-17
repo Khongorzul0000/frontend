@@ -49,6 +49,7 @@
     align-items: center;
     gap: 30px;
     margin-bottom: 50px;
+    
 }
 p{
     color: white;
@@ -81,6 +82,7 @@ p{
     width: 280px;
     border-radius: 30px;
     font-size: 17px;
+    padding-left: 10px;
 }
 .cr{
     height: 30px;
@@ -110,4 +112,10 @@ p{
 }
 .ax{
     margin: 10px;
+}
+.white{
+    height: 100px;
+    width: 100px;
+    background-color: white;
+
 }

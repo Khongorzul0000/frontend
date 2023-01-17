@@ -1,6 +1,6 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import { Signup, Login, Home , Left} from "./component";
+import { Signup, Login, Home , Left, Modal} from "./component";
 import { Date2, Search, My} from "./component";
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
     </div>
     <Left/>
     </>
+   
    
     
    
