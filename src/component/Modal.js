@@ -1,11 +1,19 @@
 import styles from "../styles/Modal.module.css";
 import { useState } from "react";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { isEmpty } from "@firebase/util";
 export const Modal = () => {
+
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [artist, setArtist] = useState("");
   const [allsongs, setAllsongs] = useState([]);
+
   const createSong = () => {
+
+if(!artist)return
     const newSong = { name: name, artist: artist };
     setAllsongs([...allsongs, newSong]);
     console.log(name, artist);
@@ -19,9 +27,29 @@ export const Modal = () => {
         console.log("modal");
       });
   };
+  const clickBtn = () =>{
+    if( 1===1){
+      navigate("signup");
+    }
+  }
+
+  const dltBtn = (index) =>{
+    const removeList = allsongs.filter((_,i) =>{
+      if(i === index) return 
+    })
+    setAllsongs(removeList)
+
+  }
+
   return (
-    <>
+    <div>
+      <div className={styles.cir}>
+      <div className={styles.box} onClick={clickBtn}>
+        <AiOutlineArrowLeft/>
+      </div>
+      </div>
       <div className={styles.flex}>
+        
         <div className={styles.create}>
           Create songs
           <input
@@ -42,23 +70,25 @@ export const Modal = () => {
         </div>
       </div>
       <div className={styles.not}>
-        <p className={styles.title} style={{ color: "black", width: "40vw" }}>
+        <p className={styles.title} style={{ color: "white", width: "35vw" }}>
           #title
         </p>
-        <p style={{ color: "black", width: "30vw" }}>artist</p>
-        <p style={{ color: "black" }}>date</p>
+        <p style={{ color: "white", width: "25vw" }}>artist</p>
+        <p style={{ color: "white" }}>date</p>
       </div>
+      <hr></hr>
       <div>
         {allsongs.map((song, index) => {
           return (
             <div className={styles.not}>
-              <div style={{ color: "black", width: "40vw" }}>{song.name}</div>
-              <div style={{ color: "black", width: "30vw" }}>{song.artist}</div>
-              <div></div>
+              <div style={{ color: "white", width: "35vw", height:"40px"}}>{song.name}</div>
+              <div style={{ color: "white", width: "25vw" }}>{song.artist}</div>
+              <div style={{ color: "white", width: "10vw" }}>date</div>
+              <button style={{ height:"30px"}} onClick={dltBtn}>delete</button>
             </div>
           );
         })}
       </div>
-    </>
+    </div>
   );
 };

@@ -1,0 +1,9 @@
+const remove = (index) => {
+    console.log("remove");
+    
+    const newTasks = tasks.filter((_, i) => {
+      if (i === index) return false;
+      return true;
+    });
+    setTasks(newTasks);
+  };

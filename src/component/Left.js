@@ -12,6 +12,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 export const Left = () => {
   const [user, setUser] = useState(null);
+  const [logout, setLogout] = useState(false);
 
   const handleLogout = () => {
     signOut(auth)
@@ -35,8 +36,6 @@ export const Left = () => {
       }
     });
   }, []);
-
-  
 
   return (
     <div className={styles.ai}>
@@ -62,20 +61,19 @@ export const Left = () => {
             <div className={styles.ttt}>
               <div className={styles.home}>
                 <AiFillPlusSquare />
-                <Link to="create play-list" className={styles.link}>
+                <Link to="createplay-list" className={styles.link}>
                   Create play-list
                 </Link>
               </div>
 
               <div className={styles.home}>
                 <BsBookmarkHeartFill />
-                <Link to="liked songs" className={styles.link}>
+                <Link to="likedsongs" className={styles.link}>
                   Liked songs
                 </Link>
               </div>
             </div>
             <hr></hr>
-            
           </div>
         </div>
         <div className={styles.fb}>
@@ -91,17 +89,31 @@ export const Left = () => {
                   </p>
                 )}
               </div>
+
               <div className={styles.ger}>
                 <Link to="sign-up" className={styles.link}>
                   Sign-up
                 </Link>
               </div>
-              <div className={styles.ger}>
-                <Link to="log-in" className={styles.link}>
+              <div className={styles.ger} onClick={() => setLogout(true)}>
+                {/* <Link to="log-in" className={styles.link}>
                   login
-                </Link>
+                </Link> */}
+                more
               </div>
             </div>
+          </div>
+          <div>
+            {logout && (
+              <div
+                style={{
+                  height: "100px",
+                  width: "100px",
+                  backgroundColor: "red",
+                  zIndex: "7",
+                }}
+              ></div>
+            )}
           </div>
           <Routes>
             <Route path="Home" element={<Home />}></Route>
@@ -109,8 +121,8 @@ export const Left = () => {
             <Route path="Search" element={<Search />}></Route>
             <Route path="sign-up" element={<Signup />}></Route>
             <Route path="log-in" element={<Login />}></Route>
-            <Route path="create play-list" element={<Home />}></Route>
-            <Route path="liked songs" element={<Like />}></Route>
+            <Route path="createplay-list" element={<Home />}></Route>
+            <Route path="likedsongs" element={<Like />}></Route>
           </Routes>
         </div>
       </BrowserRouter>

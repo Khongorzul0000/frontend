@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import styles from "../styles/Main.module.css";
-import { Left, Song, Nav, Happy, Oneof, Lenght , Modal} from "../component";
+import { Modal } from "../component";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 import axios from "axios";
@@ -9,13 +9,10 @@ import axios from "axios";
 export const Home = () => {
   const [user, setUser] = useState(null);
   const [title, setTitle] = useState("");
-  const [lana, setlana] = useState("");
   const [des, setDes] = useState("");
-  const [songlist, setSonglist] = useState([]);
   const [playlist, setPlaylist] = useState([]);
-  const [chose, setChose] = useState(false);
   const navigate = useNavigate();
-  const [isShow, setIsShow] = useState(false)
+  const [isShow, setIsShow] = useState(false);
 
   const handleLogout = () => {
     signOut(auth)
@@ -51,9 +48,11 @@ export const Home = () => {
   }, []);
 
   const createPlaylist = () => {
+    if (!des) return;
+
     const newPlaylist = { title: title, description: des };
     setPlaylist([...playlist, newPlaylist]);
-    
+
     if ((!title, !des)) {
       return;
     }
@@ -68,84 +67,90 @@ export const Home = () => {
         console.log(res);
         console.log("poooo");
       });
-
-
-
   };
-  
 
-  // const showSong = () =>{
-  //   console.log("showSong is woking")
-  //   const showList = {title:lana, status:chose};
-  //   setSonglist([...songlist, showList])
-  //   const withChose = [songlist]
-  //   withChose[index].setChose = !withChose[index].setChose
-  //   setSonglist(showList)
-  //   console.log(showList)
-  // }
-
+  const dltBtn = (index) => {
+    const dltList = playlist.filter((_, i) => {
+      if (i === index) return;
+    });
+    setPlaylist(dltList);
+    console.log("dlt");
+  };
 
   return (
     <div className={styles.be}>
-      <div className={styles.cp}>
-        <h1>createPlaylist</h1>
-      </div>
-      <div className={styles.nav}>
-        <div className={styles.dec}>
-          <p>createPlaylist</p>
-          <input
-            className={styles.inpt}
-            value={title}
-            placeholder="title"
-            onChange={(e) => setTitle(e.target.value)}
-          ></input>
-          <input
-            className={styles.inpt}
-            value={des}
-            onChange={(e) => setDes(e.target.value)}
-            placeholder="description"
-          ></input>
-          <button onClick={createPlaylist} className={styles.cr}>createplaylist</button>
+      {isShow && (
+        <div
+          style={{
+            padding: "40px",
+            backgroundColor: "#121212",
+            height: "100vh",
+          }}
+        >
+          <Modal />
         </div>
-        <div>{/* <button onClick={handleLogout}>logout</button> */}</div>
-      </div>
-    <div>
-    {/* {isShow === true && songlist.map((list, index) =>{
-            return(
-              <>
-              <div className={styles.white}></div>
-              </>
-            )
-          })} */}
-          {
-            isShow && <div style={{
-              padding: "40px",
-              backgroundColor : "white"
-            }}>
-             <Modal/>
+      )}
+      <div>
+        {!isShow && (
+          <div>
+            <div className={styles.cp}>
+              <h1>createPlaylist</h1>
+            </div>
+            <div className={styles.nav}>
+              <div className={styles.dec}>
+                <p>createPlaylist</p>
+                <input
+                  className={styles.inpt}
+                  value={title}
+                  placeholder="title"
+                  onChange={(e) => setTitle(e.target.value)}
+                ></input>
+                <input
+                  className={styles.inpt}
+                  value={des}
+                  onChange={(e) => setDes(e.target.value)}
+                  placeholder="description"
+                ></input>
+                <button onClick={createPlaylist} className={styles.cr}>
+                  createplaylist
+                </button>
               </div>
-          }
-    </div>
-      <div className={styles.main}>
-        {console.log(playlist, "playlist")}
-        <div className={styles.plj}>
-          {playlist.map((play, index) => {
-            return (
-              <div >
-                <div className={styles.plca} onClick={() => setIsShow(true)}>
-                  <img src="https://wallpapercave.com/wp/wp8404552.jpg" className={styles.wall}></img>
-                  <p className={styles.title}>{play.title}</p>
-                  <p className={styles.des}>{play.description}</p>
-                  <button className={styles.ax}>delete</button>
-                </div>
+            </div>
+            <div></div>
+            <div className={styles.main}>
+              {console.log(playlist, "playlist")}
+              <div className={styles.plj}>
+                {playlist.map((play) => {
+                  return (
+                    <div>
+                      <div className={styles.plca}>
+                        <img
+                          alt="just wallpaper"
+                          src="https://wallpapercave.com/wp/wp8404552.jpg"
+                          className={styles.wall}
+                        ></img>
+                        <p className={styles.title}>{play.title}</p>
+                        <p className={styles.des}>{play.description}</p>
+                        <div style={{ display:"flex"}}>
+                          <button className={styles.ax} onClick={dltBtn}>
+                            delete
+                          </button>
+                          <button
+                            className={styles.ax}
+                            onClick={() => setIsShow(true)}
+                          >
+                            see songs
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            );
-          })}
-        </div>
+            </div>
+          </div>
+        )}
       </div>
-      
     </div>
   );
 };
-
-

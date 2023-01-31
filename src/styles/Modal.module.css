@@ -33,3 +33,17 @@
 .not{
     display: flex;
 }
+.box{
+    font-size: 20px;
+    color:white;
+    border: 0;
+}
+.cir{
+    height: 40px;
+    width: 40px;
+    background-color: rgb(67, 62, 62);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
