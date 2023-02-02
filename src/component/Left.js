@@ -95,26 +95,14 @@ export const Left = () => {
                   Sign-up
                 </Link>
               </div>
-              <div className={styles.ger} onClick={() => setLogout(true)}>
-                {/* <Link to="log-in" className={styles.link}>
+              <div className={styles.ger}>
+                <Link to="log-in" className={styles.link}>
                   login
-                </Link> */}
-                more
+                </Link>
               </div>
             </div>
           </div>
-          <div>
-            {logout && (
-              <div
-                style={{
-                  height: "100px",
-                  width: "100px",
-                  backgroundColor: "red",
-                  zIndex: "7",
-                }}
-              ></div>
-            )}
-          </div>
+          <div></div>
           <Routes>
             <Route path="Home" element={<Home />}></Route>
             <Route path="/" element={<My />}></Route>

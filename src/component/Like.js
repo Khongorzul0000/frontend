@@ -19,12 +19,7 @@ export const Like = () => {
     });
     setTasks(newTasks);
   };
-  const handleCheck = (index) => {
-    const tasksClone = [...tasks];
-    tasksClone[index].isCompleted = !tasksClone[index].isCompleted;
-    setTasks(tasksClone);
-  };
-
+  
   return (
     <div className={styles.bg}>
       <div>

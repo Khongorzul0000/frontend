@@ -38,15 +38,6 @@ export const Home = () => {
     });
   }, []);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/playlists")
-      .then((res) => {
-        setPlaylist(res.data);
-      })
-      .catch(console.log);
-  }, []);
-
   const createPlaylist = () => {
     if (!des) return;
 
@@ -57,7 +48,7 @@ export const Home = () => {
       return;
     }
     axios
-      .get("http://localhost:3002/playlists", {
+      .post("http://localhost:3002/playlists", {
         title: title,
         description: des,
         creatorId: user.uid,
@@ -69,12 +60,28 @@ export const Home = () => {
       });
   };
 
-  const dltBtn = (index) => {
-    const dltList = playlist.filter((_, i) => {
-      if (i === index) return;
+  useEffect(() => {
+    axios
+      .get("http://localhost:3002/playlists")
+      .then((res) => {
+        setPlaylist(res.data);
+      })
+      .catch(console.log);
+  }, []);
+
+  
+
+  const dltBtn = (id ) => {
+    console.log(id);
+    // const dltList = playlist.filter((_, i)=>{
+    //   if (id === i) return;
+    // })
+    // setPlaylist(dltList)
+
+    axios.delete(`http://localhost:3002/playlist/${id}`)
+    .then((res) => {
+      console.log(res);
     });
-    setPlaylist(dltList);
-    console.log("dlt");
   };
 
   return (
@@ -120,7 +127,7 @@ export const Home = () => {
             <div className={styles.main}>
               {console.log(playlist, "playlist")}
               <div className={styles.plj}>
-                {playlist.map((play) => {
+                {playlist.map((play, index) => {
                   return (
                     <div>
                       <div className={styles.plca}>
@@ -131,8 +138,11 @@ export const Home = () => {
                         ></img>
                         <p className={styles.title}>{play.title}</p>
                         <p className={styles.des}>{play.description}</p>
-                        <div style={{ display:"flex"}}>
-                          <button className={styles.ax} onClick={dltBtn}>
+                        <div style={{ display: "flex" }}>
+                          <button
+                            className={styles.ax}
+                            onClick={() => dltBtn(play._id, index)}
+                          >
                             delete
                           </button>
                           <button

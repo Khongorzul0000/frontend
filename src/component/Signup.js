@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate, Navlink} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
-import axios from "axios";
 import styles from "../styles/Signup.module.css";
-import {Login} from "./Login"
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -20,7 +18,7 @@ export const Signup = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        navigate("/Search");
+        navigate("/home");
         //   axios.post('http://localhost:3001/users', {
         //     email:user.email,
         //     password:password,
@@ -37,7 +35,7 @@ export const Signup = () => {
       }); 
       
   };
-  if( email )
+  
 
   return (
     <>
