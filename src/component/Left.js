@@ -4,8 +4,9 @@ import { BsBookmarkHeartFill } from "react-icons/bs";
 import { AiFillHome } from "react-icons/ai";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaUserAlt } from "react-icons/fa";
-import { Home, Signup, My, Search, Like, Login } from "../component";
+import { Home, Signup, My, Search, Like, Login , Main} from "../component";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
 import styles from "../styles/Left.module.css";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -13,6 +14,7 @@ import { auth } from "../config/firebase";
 export const Left = () => {
   const [user, setUser] = useState(null);
   const [logout, setLogout] = useState(false);
+ 
 
   const handleLogout = () => {
     signOut(auth)
@@ -96,15 +98,20 @@ export const Left = () => {
                 </Link>
               </div>
               <div className={styles.ger}>
-                <Link to="log-in" className={styles.link}>
+                <Link to="log-in" className={styles.link} onClick={handleLogout}>
                   login
+                </Link>
+              </div>
+              <div className={styles.ger}>
+                <Link to="log-in" className={styles.link}>
+                  logout
                 </Link>
               </div>
             </div>
           </div>
           <div></div>
           <Routes>
-            <Route path="Home" element={<Home />}></Route>
+            <Route path="Home" element={<Main />}></Route>
             <Route path="/" element={<My />}></Route>
             <Route path="Search" element={<Search />}></Route>
             <Route path="sign-up" element={<Signup />}></Route>

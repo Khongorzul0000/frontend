@@ -5,6 +5,7 @@ export * from "./Left";
 export * from "./Song";
 export * from "./Modal";
 export * from "./See";
+export * from "./Main";
 
 export * from "./Search";
 export * from "./Happy";

@@ -69,20 +69,17 @@ export const Home = () => {
       .catch(console.log);
   }, []);
 
-  
-
-  const dltBtn = (id ) => {
+  const dltBtn = (id) => {
     console.log(id);
-    // const dltList = playlist.filter((_, i)=>{
-    //   if (id === i) return;
-    // })
-    // setPlaylist(dltList)
 
-    axios.delete(`http://localhost:3002/playlist/${id}`)
-    .then((res) => {
+    axios.delete(`http://localhost:3002/playlist/${id}`).then((res) => {
       console.log(res);
     });
+
+    
+  
   };
+  
 
   return (
     <div className={styles.be}>
@@ -141,7 +138,8 @@ export const Home = () => {
                         <div style={{ display: "flex" }}>
                           <button
                             className={styles.ax}
-                            onClick={() => dltBtn(play._id, index)}
+                            // onClick={() => dltBtn(play._id, index, play)}
+                            onClick={() => dltBtn( play._id )}
                           >
                             delete
                           </button>

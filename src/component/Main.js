@@ -1,9 +1,9 @@
 import styles from "../styles/Main.module.css";
-import { useNavigate } from "react-router-dom";
-import { Left, Song, Nav, Happy, Oneof, Lenght } from "../component";
+
+import { Song, Happy, Oneof, Lenght } from "../component";
 
 export const Main = () => {
-  const navigate = useNavigate();
+
 
   return (
     <>
